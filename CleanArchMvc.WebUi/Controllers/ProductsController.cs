@@ -13,11 +13,15 @@ namespace CleanArchMvc.WebUI.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IWebHostEnvironment _environment;
-        public ProductsController(IProductService productAppService, ICategoryService categoryService, IWebHostEnvironment environment)
+
+        public ProductsController(IProductService productAppService,
+            ICategoryService categoryService, IWebHostEnvironment environment)
         {
             _productService = productAppService;
             _categoryService = categoryService;
             _environment = environment;
+
+
         }
 
         [HttpGet]
@@ -27,22 +31,24 @@ namespace CleanArchMvc.WebUI.Controllers
             return View(products);
         }
 
-        [HttpGet]
+        [HttpGet()]
         public async Task<IActionResult> Create()
         {
-            ViewBag.CategoryId = new SelectList(await _categoryService.GetCategories(), "Id", "Name");
+            ViewBag.CategoryId =
+            new SelectList(await _categoryService.GetCategories(), "Id", "Name");
+
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductDTO ProductDto)
+        public async Task<IActionResult> Create(ProductDTO productDto)
         {
             if (ModelState.IsValid)
             {
-                await _productService.Add(ProductDto);
+                await _productService.Add(productDto);
                 return RedirectToAction(nameof(Index));
             }
-            return View(ProductDto);
+            return View(productDto);
         }
 
         [HttpGet()]
@@ -50,13 +56,16 @@ namespace CleanArchMvc.WebUI.Controllers
         {
             if (id == null) return NotFound();
             var productDto = await _productService.GetById(id);
+
             if (productDto == null) return NotFound();
+
             var categories = await _categoryService.GetCategories();
-            ViewBag.CategoriesId = new SelectList(categories, "Id", "Name", productDto.CategoryId);
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", productDto.CategoryId);
+
             return View(productDto);
         }
 
-        [HttpPost]
+        [HttpPost()]
         public async Task<IActionResult> Edit(ProductDTO productDto)
         {
             if (ModelState.IsValid)
@@ -67,12 +76,16 @@ namespace CleanArchMvc.WebUI.Controllers
             return View(productDto);
         }
 
-        [HttpGet]
+        [HttpGet()]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+                return NotFound();
+
             var productDto = await _productService.GetById(id);
+
             if (productDto == null) return NotFound();
+
             return View(productDto);
         }
 
