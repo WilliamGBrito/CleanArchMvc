@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CleanArchMvc.WebUi.ViewModels
+namespace CleanArchMvc.WebUI.ViewModels
 {
     public class RegisterViewModel
     {

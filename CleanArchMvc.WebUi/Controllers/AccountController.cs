@@ -1,12 +1,12 @@
 ﻿using CleanArchMvc.Domain.Account;
-using CleanArchMvc.WebUi.ViewModels;
+using CleanArchMvc.WebUI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CleanArchMvc.WebUi.Controllers
+namespace CleanArchMvc.WebUI.Controllers
 {
     public class AccountController : Controller
     {
