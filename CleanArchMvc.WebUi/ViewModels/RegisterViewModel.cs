@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CleanArchMvc.WebUI.ViewModels
 {
@@ -18,7 +14,7 @@ namespace CleanArchMvc.WebUI.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Pasword", ErrorMessage = "Password don't match")]
+        [Compare("Password", ErrorMessage = "Passwords don´t match")]
         public string ConfirmPassword { get; set; }
     }
 }

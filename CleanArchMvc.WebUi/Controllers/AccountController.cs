@@ -1,9 +1,6 @@
 ﻿using CleanArchMvc.Domain.Account;
 using CleanArchMvc.WebUI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CleanArchMvc.WebUI.Controllers
@@ -11,13 +8,13 @@ namespace CleanArchMvc.WebUI.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthenticate _authentication;
-        public AccountController(IAuthenticate authenticate)
+        public AccountController(IAuthenticate authentication)
         {
-            _authentication = authenticate;
+            _authentication = authentication;
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl) 
+        public IActionResult Login(string returnUrl)
         {
             return View(new LoginViewModel()
             {
@@ -44,9 +41,9 @@ namespace CleanArchMvc.WebUI.Controllers
                 return View(model);
             }
         }
-        
+
         [HttpGet]
-        public IActionResult Register() 
+        public IActionResult Register()
         {
             return View();
         }
@@ -62,12 +59,12 @@ namespace CleanArchMvc.WebUI.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid register attempt (password must be strong.)");
+                ModelState.AddModelError(string.Empty, "Invalid register attempt (password must be strong.");
                 return View(model);
             }
         }
 
-        public async Task<IActionResult> Logout() 
+        public async Task<IActionResult> Logout()
         {
             await _authentication.Logout();
             return Redirect("/Account/Login");
